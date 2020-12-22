@@ -93,7 +93,7 @@ span {
   width: 1px;
 }
 
-@media (min-width: 30rem) {
+@media (min-width: 40rem) {
   ul {
     flex-direction: row;
   }
