@@ -60,7 +60,7 @@ a {
 
 a:hover,
 a:focus {
-  background: var(--background-hover);
+  background-color: var(--background-hover);
   border-color: var(--color-base);
 }
 

@@ -134,24 +134,117 @@ svg {
 
 ### Reset
 
+#### Border Box
 
-### 
+In order to have the `border` properties apply consistently across browsers it is best to set `box-sizing: border-box` on all applicable elements.
 
+To easily achieve this it can be set with the wildcard (`*`) selector:
+
+```css
+* {
+  box-sizing: border-box;
+}
+```
+
+#### Font rendering
+
+To have consistent font rendering across browsers it is best to srt the following properties on the `:root`, `html`, or `body` selector:
+
+1. `font-family` in this case `font-family: system-ui` (or the full font-stack `font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;`)
+2. `-webkit-text-size-adjust: 100%` to handle iOS properly resizing the text when the browser page is zoomed
+3. `font-smoothing` to ensure `font-weight` is stylistically the same between browsers
+
+```css
+html {
+  font-family: system-ui;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+```
+
+### Task
+
+#### Container
+
+Wrapping the navigation is a container which limits the width of the content extending past `640px`.
+
+Best practice is to use `rem` values to ensure that the `max-width` property value also scales when the root `font-size` is increased.
+
+```css
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 40rem; /* equals 640px */
+}
+```
+
+#### Hover/Focus
+
+Apply `background-color` and `border-color`.
+
+1. `background-color` instead of `background` for more explicit CSS styles to avoid overides of other background properties (e.g. `background-position`, `background-size` etc.).
+2. `border-color` the border should be set on the link and be made visible with `border-color` instead of setting all border properties on `:hover`/`:focus` to avoid content shifting.
+
+```css
+a:hover,
+a:focus {
+  background-color: var(--background-hover); /* or color equivalent */
+  border-color: var(--color-base); /* or color equivalent */
+}
+```
+
+#### Current page
+
+To style the current page's link use the `[aria-current="page"]` selector, or custom class (e.g. `.active`) which is applied with logic with the `aria-current="page"` attribute.
+
+```css
+a[aria-current="page"] {
+  border-color: var(--color-base); /* or color equivalent */
+  font-weight: 600; /* or bold */
+}
+```
+
+#### Visually hidden content
+
+Ensure visually-hidden content (in this case the `<h2>`) is still decernable by screen-readers. This may also be `.sr-only`, `.screen-reader`, `.hide-visually` etc.
+
+```css
+.visually-hidden {
+  border: none;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+```
+
+**Please note:** using `display: none` or `visibility: hidden` removes the content from the accessibility tree and means it cannot be read by assistive technologies like screen-readers.
 
 ## Design
 
 ### Fonts
 
-For the purposed of this exercise we will use the `system-ui` font stack.
+#### If we required a custom typeface, what would be your approach? What are the potential risks of using a custom typeface?
 
-**Question:** If we required a custom typeface, what would be your approach? What are the potential risks of using a custom typeface?
+**Possible Answer(s):**
+
+- Flash of un-styled text (FOUT) when the `font-face` is loading.
+- Decreased performance as `font-face` is render-blocking unless `font-display` property is set.
+- Stylistic rendering, custom typeface fonts require alignment for use on the web, print fonts may not render as expected (also between browsers) and lead to increased or misaligned whitespace.
+- Require fallback font-stack in the case that a browser or user has blocked custom fonts to ensure content renders as expected.
 
 ### Colors
 
-| Color       | Hex       |
-| ----------- | --------- |
-| Base        | `#003453` |
-| Border      | `#dde1e3` |
-| Hover/Focus | `#d8f7fb` |
+#### What would be your approach to organise colors in a larger palette? How would you maintain colors as part of a wider design system?
 
-**Question:** What would be your approach to organise colors in a larger palette? How would you maintain colors as part of a wider design system?
+**Possible Answer(s):** 
+
+- Use SASS/SCSS variables or CSS custom properties to define colors in a single location for use throughout UI
+- Atomic CSS classes which set `color: value` only to ensure CSS is DRY (don't repeat yourself).
+- Abstract naming convention for colors e.g. `blue-500`, `brand-base`, `primary-default` etc.
+- Define color scales e.g. Material Designs color scale `100` - `900`.
