@@ -59,13 +59,13 @@ a {
 }
 
 a:hover,
-a:focus,
-a[aria-current="page"] {
+a:focus {
   background: var(--background-hover);
   border-color: var(--color-base);
 }
 
 a[aria-current="page"] {
+  border-color: var(--color-base);
   font-weight: 600;
 }
 
