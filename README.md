@@ -2,9 +2,22 @@
 
 ## Task
 
+The menu options are:
+
+- Dashboard
+- Search
+- Bookings
+- Jobs
+- Experiences
+
+### What is being evaluated
+
 - How the label the navigation to provide context for accessibility technologies to understand it is a "Main navigation"?
 - How to markup a navigation for accessibility?
 - How to represent an active link in the navigation?
+- How would you approach including the SVG icons?
+
+**Question:** While there are only few SVGs here, how might we best accommodate a system of more SVGs?
 
 ### Design
 
