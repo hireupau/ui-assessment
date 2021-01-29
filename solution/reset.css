@@ -1,0 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: system-ui;
+  text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
